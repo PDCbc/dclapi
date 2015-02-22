@@ -1,0 +1,10 @@
+{
+  "name": "DCLApi",
+  "version": "0.0.0",
+  "description": "API for looking up drugs.",
+  "license": "GPLv2",
+  "author": "David Rusk <rusk.david@gmail.com",
+  "dependencies": {
+    "express": "~4.11.2"
+  }
+}
