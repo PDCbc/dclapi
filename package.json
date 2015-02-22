@@ -4,7 +4,13 @@
   "description": "API for looking up drugs.",
   "license": "GPLv2",
   "author": "David Rusk <rusk.david@gmail.com",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha tests/"
+  },
   "dependencies": {
     "express": "~4.11.2"
+  },
+  "devDependencies": {
+    "mocha": "~2.1.0"
   }
 }

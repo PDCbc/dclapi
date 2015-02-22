@@ -1,6 +1,22 @@
 DCLApi
 ------
 
+Setup
+-----
+
+Install dependencies:
+
+```
+npm install
+```
+
+Run tests:
+
+```
+npm test
+```
+
+
 Spec
 ----
 
