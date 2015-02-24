@@ -1,10 +1,8 @@
 var express = require("express");
+var routes = require("./lib/routes");
 
 var app = express();
-
-app.get("/", function(request, response) {
-    response.send("Hello World!");
-});
+app.use(routes.router);
 
 var server = app.listen(3000, function() {
     var host = server.address().address;
