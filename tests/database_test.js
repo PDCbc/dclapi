@@ -10,17 +10,19 @@ describe("SQLiteInterface", function() {
     });
 
     describe("#getDinFromAtc", function() {
-        it("should return the corresponding ATC code for a DIN", function() {
+        it("should return the corresponding ATC code for a DIN", function(done) {
             underTest.getDinFromAtc("D08AC02", function(error, result) {
                 assert.strictEqual(null, error);
                 assert.strictEqual("02229377", result);
+                done();
             });
         });
 
-        it("should throw an error if the ATC code is not recognized", function() {
+        it("should throw an error if the ATC code is not recognized", function(done) {
             underTest.getDinFromAtc("NOTRECOG", function(error, result) {
                 assert.strictEqual("ATC code not recognized", error.message);
                 assert.strictEqual(null, result);
+                done();
             });
         });
     });
