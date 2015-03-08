@@ -3,7 +3,7 @@ var request = require("supertest");
 
 var server = require("../lib/server");
 
-describe("Controllers", function() {
+describe("Server", function() {
     server.setup(null);
     request = request(server.app);
 
