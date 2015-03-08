@@ -1,13 +1,11 @@
 var assert = require("assert");
-var express = require("express");
 var request = require("supertest");
 
-var routes = require("../lib/routes");
+var server = require("../lib/server");
 
 describe("Controllers", function() {
-    var app = express();
-    app.use(routes.router);
-    request = request(app);
+    server.setup(null);
+    request = request(server.app);
 
     describe("GET /test", function() {
         it("should return Hello World in JSON", function(done) {
