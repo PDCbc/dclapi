@@ -6,6 +6,6 @@ var config = require("./config");
 var database = require("./lib/database");
 var server = require("./lib/server");
 
-var db = database.SQLiteInterface(config.db.sqlite);
+var db = new database.SQLiteInterface(config.db.sqlite);
 
 server.start(config.server.port, db);
