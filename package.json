@@ -5,7 +5,8 @@
   "license": "GPLv2",
   "author": "David Rusk <rusk.david@gmail.com",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha tests/"
+    "test": "./node_modules/mocha/bin/mocha tests/",
+    "start": "nodejs init.js"
   },
   "dependencies": {
     "express": "~4.11.2",
