@@ -6,16 +6,25 @@ Setup
 
 Install dependencies:
 
+ * SQLite
+
+ * Node.js & NPM
+
+Install required node modules:
 ```
+cd $PROJECT_DIRECTORY
 npm install
 ```
 
 Run tests:
-
 ```
 npm test
 ```
 
+Run the application:
+```
+npm start
+```
 
 Spec
 ----
