@@ -23,7 +23,8 @@ describe("Server", function() {
             };
 
             request(webService.expressApp).get("/classbyatc/A")
-                .expect("Content-Type", "application/json")
+                .expect(200)
+                .expect("Content-Type", "application/json; charset=utf-8")
                 .end(function(error, response) {
                     if (error) {
                         throw error;
@@ -32,6 +33,29 @@ describe("Server", function() {
                     assert.deepEqual(
                         JSON.parse(response.text),
                         {ATC: "A", class: "ALIMENTARY TRACT AND METABOLISM"}
+                    );
+
+                    done();
+                });
+        });
+
+        it("should return 404 and error message for an unknown ATC code", function(done) {
+            var errorMessage = "ATC code not recognized";
+            db.getAtcDescription = function(atc, callback) {
+                callback(new Error(errorMessage), null);
+            };
+
+            request(webService.expressApp).get("/classbyatc/NOTRECOG")
+                .expect(404)
+                .expect("Content-Type", "application/json; charset=utf-8")
+                .end(function(error, response) {
+                    if (error) {
+                        throw error;
+                    }
+
+                    assert.deepEqual(
+                        JSON.parse(response.text),
+                        {ATC: "NOTRECOG", error: errorMessage}
                     );
 
                     done();
