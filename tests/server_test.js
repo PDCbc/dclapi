@@ -8,10 +8,11 @@ var server = require("../lib/server");
 describe("Server", function() {
     describe("GET /classbyatc/", function() {
         var db;
+        var webService;
 
         beforeEach(function() {
             db = sinon.createStubInstance(database.SQLiteInterface);
-            server.setup(db);
+            webService = new server.ExpressServer(db);
         });
 
         it("should return JSON containing description for a known ATC code", function(done) {
@@ -21,7 +22,7 @@ describe("Server", function() {
                 }
             };
 
-            request(server.app).get("/classbyatc/A")
+            request(webService.expressApp).get("/classbyatc/A")
                 .expect("Content-Type", "application/json")
                 .end(function(error, response) {
                     if (error) {

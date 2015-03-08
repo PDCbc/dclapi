@@ -8,4 +8,5 @@ var server = require("./lib/server");
 
 var db = new database.SQLiteInterface(config.db.sqlite);
 
-server.start(config.server.port, db);
+var webService = new server.ExpressServer(db);
+webService.start(config.server.port);
