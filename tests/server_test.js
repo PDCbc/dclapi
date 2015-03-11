@@ -158,5 +158,37 @@ describe("Server", function() {
                     done();
                 });
         });
+
+        it("should return 404 and error message for unknown DIN", function(done) {
+            db.getAtcFromDin = function(din, callback) {
+                if (din === "02229377") {
+                    callback(null, "D08AC02");
+                } else {
+                    callback(new Error("DIN not recognized"));
+                }
+            };
+
+            db.getAtcDescription = function(atcCode, callback) {
+                if (atcCode === "D08") {
+                    callback(null, "ANTISEPTICS AND DISINFECTANTS");
+                }
+            };
+
+            request(webService.expressApp).get("/classbydin/12345678")
+                .expect(404)
+                .expect("Content-Type", "application/json; charset=utf-8")
+                .end(function(error, response) {
+                    if (error) {
+                        throw error;
+                    }
+
+                    assert.deepEqual(
+                        JSON.parse(response.text),
+                        {DIN: "12345678", atcLevel: 2, error: "DIN not recognized"}
+                    );
+
+                    done();
+                });
+        });
     });
 });
