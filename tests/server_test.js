@@ -224,5 +224,39 @@ describe("Server", function() {
                     done();
                 });
         });
+
+        it("should allow the atc level to be set in the querystring", function(done) {
+            db.getAtcFromDin = function(din, callback) {
+                if (din === "02229377") {
+                    callback(null, "D08AC02");
+                } else {
+                    callback(new Error("DIN not recognized"));
+                }
+            };
+
+            db.getAtcDescription = function(atcCode, callback) {
+                if (atcCode === "D") {
+                    callback(null, "DERMATOLOGICALS");
+                } else {
+                    callback(new Error("ATC code not recognized"));
+                }
+            };
+
+            request(webService.expressApp).get("/classbydin/2229377?atcLevel=1")
+                .expect(200)
+                .expect("Content-Type", "application/json; charset=utf-8")
+                .end(function(error, response) {
+                    if (error) {
+                        throw error;
+                    }
+
+                    assert.deepEqual(
+                        JSON.parse(response.text),
+                        {DIN: "02229377", atcLevel: 1, class: "DERMATOLOGICALS"}
+                    );
+
+                    done();
+                });
+        });
     });
 });
