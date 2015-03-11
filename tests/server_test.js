@@ -259,4 +259,32 @@ describe("Server", function() {
                 });
         });
     });
+
+    describe("GET /classbyfddb/", function() {
+        var db;
+        var webService;
+
+        beforeEach(function() {
+            db = sinon.createStubInstance(database.SQLiteInterface);
+            webService = new server.ExpressServer(db);
+        });
+
+        it("should return not implemented error", function(done) {
+            request(webService.expressApp).get("/classbyfddb/1234")
+                .expect(404)
+                .expect("Content-Type", "application/json; charset=utf-8")
+                .end(function(error, response) {
+                    if (error) {
+                        throw error;
+                    }
+
+                    assert.deepEqual(
+                        JSON.parse(response.text),
+                        {FDDB: "1234", error: "Service not yet implemented."}
+                    );
+
+                    done();
+                });
+        });
+    });
 });
