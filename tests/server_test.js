@@ -119,4 +119,44 @@ describe("Server", function() {
                 });
         });
     });
+
+    describe("GET /classbydin/", function() {
+        var db;
+        var webService;
+
+        beforeEach(function() {
+            db = sinon.createStubInstance(database.SQLiteInterface);
+            webService = new server.ExpressServer(db);
+        });
+
+        it("should return JSON containing level 2 description for known DIN with known ATC", function(done) {
+            db.getAtcFromDin = function(din, callback) {
+                if (din === "02229377") {
+                    callback(null, "D08AC02");
+                }
+            };
+
+            db.getAtcDescription = function(atcCode, callback) {
+                if (atcCode === "D08") {
+                    callback(null, "ANTISEPTICS AND DISINFECTANTS");
+                }
+            };
+
+            request(webService.expressApp).get("/classbydin/2229377")
+                .expect(200)
+                .expect("Content-Type", "application/json; charset=utf-8")
+                .end(function(error, response) {
+                    if (error) {
+                        throw error;
+                    }
+
+                    assert.deepEqual(
+                        JSON.parse(response.text),
+                        {DIN: "02229377", atcLevel: 2, class: "ANTISEPTICS AND DISINFECTANTS"}
+                    );
+
+                    done();
+                });
+        });
+    });
 });
