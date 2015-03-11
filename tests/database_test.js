@@ -20,7 +20,7 @@ describe("SQLiteInterface", function() {
 
         it("should throw an error if the DIN is not recognized", function(done) {
             underTest.getAtcFromDin("NOTRECOG", function(error, result) {
-                assert.strictEqual("DIN not recognized", error.message);
+                assert.strictEqual("DIN not recognized: NOTRECOG", error.message);
                 assert.strictEqual(null, result);
                 done();
             });
@@ -44,7 +44,7 @@ describe("SQLiteInterface", function() {
 
         it("should throw an error if the ATC code is not recognized", function(done) {
             underTest.getAtcDescription("ABCDEFGHIKL", function(error, result) {
-                assert.strictEqual("ATC code not recognized", error.message);
+                assert.strictEqual("ATC code not recognized: ABCDEFGHIKL", error.message);
                 assert.strictEqual(null, result);
                 done();
             });
