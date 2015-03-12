@@ -21,17 +21,68 @@ Run tests:
 npm test
 ```
 
-Run the application:
+Note that in order to run the application you will need to acquire the
+database.  See the section on data below.  Once acquired, the database
+must be called ```dcl.sqlite``` and placed at the project root.
+This is configured in ```config.js```.
+
+Once you have the database, run the application:
 ```
 npm start
+```
+
+Examples
+--------
+
+### classbyatc:
+
+```
+$ curl http://localhost:3000/classbyatc/C03CA01
+{"ATC":"C03CA01","class":"furosemide"}
+
+$ curl http://localhost:3000/classbyatc/C03CA
+{"ATC":"C03CA","class":"Sulfonamides, plain"}
+
+$ curl http://localhost:3000/classbyatc/C03C
+{"ATC":"C03C","class":"HIGH-CEILING DIURETICS"}
+
+$ curl http://localhost:3000/classbyatc/C03
+{"ATC":"C03","class":"DIURETICS"}
+
+$ curl http://localhost:3000/classbyatc/C
+{"ATC":"C","class":"CARDIOVASCULAR SYSTEM"}
+```
+
+### classbydin:
+
+```
+$ curl http://localhost:3000/classbydin/02155907
+{"DIN":"02155907","atcLevel":2,"class":"CALCIUM CHANNEL BLOCKERS"}
+
+$ curl http://localhost:3000/classbydin/02155907?atcLevel=1
+{"DIN":"02155907","atcLevel":"1","class":"CARDIOVASCULAR SYSTEM"}
+
+$ curl http://localhost:3000/classbydin/02155907?atcLevel=3
+{"DIN":"02155907","atcLevel":"3","class":"SELECTIVE CALCIUM CHANNEL BLOCKERS WITH MAINLY VASCULAR EFFECTS"}
+
+$ curl http://localhost:3000/classbydin/02155907?atcLevel=4
+{"DIN":"02155907","atcLevel":"4","class":"Dihydropyridine derivatives"}
+
+$ curl http://localhost:3000/classbydin/02155907?atcLevel=5
+{"DIN":"02155907","atcLevel":"5","class":"nifedipine"}
+```
+
+### atcbydin:
+
+```
+$ curl http://localhost:3000/atcbydin/02155907
+{"DIN":"02155907","ATC":"C08CA05"}
 ```
 
 Data
 ----
 
 The data is not included in this repository, but the scripts used to acquire it are.
-Once acquired, the database must be called ```dcl.sqlite``` and placed at the project
-root.  This is configured in ```config.js```.
 
 ### Acquiring DIN to ATC Data
 
