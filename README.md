@@ -30,6 +30,8 @@ Data
 ----
 
 The data is not included in this repository, but the scripts used to acquire it are.
+Once acquired, the database must be called ```dcl.sqlite``` and placed at the project
+root.  This is configured in ```config.js```.
 
 ### Acquiring DIN to ATC Data
 
