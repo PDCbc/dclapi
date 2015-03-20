@@ -6,7 +6,7 @@
   "author": "David Rusk <rusk.david@gmail.com",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha tests/",
-    "start": "nodejs init.js"
+    "start": "node init.js"
   },
   "dependencies": {
     "express": "~4.11.2",
