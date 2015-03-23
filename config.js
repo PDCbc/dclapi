@@ -3,6 +3,6 @@ module.exports = {
         "sqlite": "dcl.sqlite"
     },
     "server": {
-        "port": 3000
+        "port": 3007
     }
 };
