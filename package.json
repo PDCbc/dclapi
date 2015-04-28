@@ -8,6 +8,10 @@
     "test": "./node_modules/mocha/bin/mocha tests/",
     "start": "node init.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/physiciansdatacollaborative/dclapi.git"
+  },
   "dependencies": {
     "express": "~4.11.2",
     "sqlite3": "~3.0.5"
