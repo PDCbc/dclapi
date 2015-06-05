@@ -1,6 +1,6 @@
 module.exports = {
     "db": {
-        "sqlite": "dcl.sqlite"
+        "sqlite": "drugref/dcl.sqlite"
     },
     "server": {
         "port": 3007
